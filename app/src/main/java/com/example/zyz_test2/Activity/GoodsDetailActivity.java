@@ -1,0 +1,43 @@
+package com.example.zyz_test2.Activity;
+
+import android.text.TextUtils;
+import android.widget.TextView;
+
+import com.example.zyz_test2.Common.BaseActivity;
+import com.example.zyz_test2.R;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+
+public class GoodsDetailActivity extends BaseActivity {
+
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    private int goods_id;
+    private String goods_name;
+
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_goods_detail;
+    }
+
+    @Override
+    public void initView(){
+        super.initView();
+        goods_id=getIntent().getIntExtra("goods_id",0);
+        goods_name=getIntent().getStringExtra("goods_name");
+        tvTitle.setMaxEms(9);
+        tvTitle.setLines(1);
+        if(TextUtils.isEmpty(goods_name)){
+            tvTitle.setText("商品详情");
+        }else{
+            tvTitle.setText(goods_name);
+        }
+    }
+
+    @OnClick(R.id.iv_back)
+    void close(){
+        finish();
+    }
+}
